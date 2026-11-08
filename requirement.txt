@@ -1,0 +1,39 @@
+# Công cụ cần cài trên Ubuntu/WSL2 (đây không phải danh sách gói pip).
+# Dự án C++/CUDA, không cần thư viện Python.
+# Cài tự động trên Ubuntu WSL2 x86_64: bash install.sh
+# Chỉ C++/MPI: bash install.sh --cpu-only
+
+# 1. Bản tuần tự: trình biên dịch C++17
+# Cài: sudo apt update && sudo apt install build-essential
+build-essential
+
+# 2. Bản MPI: cung cấp mpic++ và mpirun
+# Cài: sudo apt install openmpi-bin libopenmpi-dev
+openmpi-bin
+libopenmpi-dev
+
+# 3. Bản CUDA: GPU NVIDIA và CUDA Toolkit có nvcc
+# Quadro P3200 của máy này: dùng CUDA Toolkit 12.6 hoặc 12.8, kiến trúc sm_61.
+# Chọn MỘT trong hai phiên bản, cài từ kho NVIDIA dành cho WSL-Ubuntu:
+# https://developer.nvidia.com/cuda-toolkit-archive
+# Sau khi thêm kho tương ứng: sudo apt install cuda-toolkit-12-8
+cuda-toolkit-12-8
+# Trình biên dịch host cho nvcc 12.8, tránh g++ mặc định quá mới.
+g++-13
+# Công cụ tải kho NVIDIA bằng HTTPS (install.sh tự cài).
+ca-certificates
+curl
+# Nếu nvcc chưa có trong PATH:
+# export PATH=/usr/local/cuda-12.8/bin:$PATH
+
+# WSL2 dùng driver NVIDIA cài trên Windows; không cài driver NVIDIA Linux trong WSL.
+# Hướng dẫn: https://docs.nvidia.com/cuda/wsl-user-guide/
+
+# Kiểm tra sau khi cài:
+# g++ --version
+# mpic++ --version
+# mpirun --version
+# nvcc --version
+# nvidia-smi
+
+# Lệnh biên dịch/chạy từng phiên bản nằm trong readme.md.

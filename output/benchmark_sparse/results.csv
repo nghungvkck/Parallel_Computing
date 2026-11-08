@@ -1,0 +1,6 @@
+file,vertices,edges,source,implementation,processes,timing_scope,run1_s,run2_s,run3_s,run4_s,run5_s,median_s,min_s,max_s
+sparse_100_300.txt,100,300,0,serial,1,Algorithm only; excludes graph loading and printing.,4.4e-05,4.3e-05,4.5e-05,4.9e-05,4.5e-05,4.5e-05,4.3e-05,4.9e-05
+sparse_1000_3000.txt,1000,3000,0,serial,1,Algorithm only; excludes graph loading and printing.,0.00364,0.003462,0.003477,0.003549,0.003433,0.003477,0.003433,0.00364
+sparse_2000_6000.txt,2000,6000,0,serial,1,Algorithm only; excludes graph loading and printing.,0.016522,0.015182,0.015056,0.015104,0.015469,0.015182,0.015056,0.016522
+sparse_5000_15000.txt,5000,15000,0,serial,1,Algorithm only; excludes graph loading and printing.,0.113824,0.112763,0.11465,0.113039,0.113307,0.113307,0.112763,0.11465
+sparse_10000_30000.txt,10000,30000,0,serial,1,Algorithm only; excludes graph loading and printing.,0.493595,0.497767,0.484499,0.491081,0.502247,0.493595,0.484499,0.502247
