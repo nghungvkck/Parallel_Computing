@@ -1,6 +1,0 @@
-file,vertices,edges,source,implementation,processes,timing_scope,run1_s,run2_s,run3_s,run4_s,run5_s,median_s,min_s,max_s
-sparse_100_300.txt,100,300,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.000308,0.000235,0.000274,0.000246,0.000829,0.000274,0.000235,0.000829
-sparse_1000_3000.txt,1000,3000,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.010192,0.002546,0.002489,0.002559,0.007213,0.002559,0.002489,0.010192
-sparse_2000_6000.txt,2000,6000,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.007269,0.019222,0.006883,0.007507,0.006902,0.007269,0.006883,0.019222
-sparse_5000_15000.txt,5000,15000,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.09925,0.037488,0.040977,0.0405,0.040676,0.040676,0.037488,0.09925
-sparse_10000_30000.txt,10000,30000,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.204511,0.261674,0.293458,0.17315,0.188056,0.204511,0.17315,0.293458

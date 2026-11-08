@@ -1,0 +1,26 @@
+file,vertices,edges,source,implementation,processes,timing_scope,run1_s,run2_s,run3_s,run4_s,run5_s,median_s,min_s,max_s
+dense_10_45.txt,10,45,0,mpi,1,"Algorithm only; excludes scatter/gather, graph loading and printing.",3e-06,4e-06,3e-06,3e-06,4e-06,3e-06,3e-06,4e-06
+dense_100_4950.txt,100,4950,0,mpi,1,"Algorithm only; excludes scatter/gather, graph loading and printing.",5.2e-05,5.3e-05,5.1e-05,5.5e-05,5.1e-05,5.2e-05,5.1e-05,5.5e-05
+dense_1000_499500.txt,1000,499500,0,mpi,1,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.003753,0.003934,0.003969,0.003832,0.00394,0.003934,0.003753,0.003969
+dense_2000_1999000.txt,2000,1999000,0,mpi,1,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.015083,0.014945,0.015231,0.015055,0.015087,0.015083,0.014945,0.015231
+dense_3000_4498500.txt,3000,4498500,0,mpi,1,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.033567,0.034003,0.03291,0.03376,0.034074,0.03376,0.03291,0.034074
+dense_10_45.txt,10,45,0,mpi,2,"Algorithm only; excludes scatter/gather, graph loading and printing.",1.7e-05,2.9e-05,2.3e-05,2e-05,1.9e-05,2e-05,1.7e-05,2.9e-05
+dense_100_4950.txt,100,4950,0,mpi,2,"Algorithm only; excludes scatter/gather, graph loading and printing.",8.1e-05,7.8e-05,7.9e-05,7.4e-05,7.8e-05,7.8e-05,7.4e-05,8.1e-05
+dense_1000_499500.txt,1000,499500,0,mpi,2,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.002159,0.002199,0.002159,0.002195,0.002145,0.002159,0.002145,0.002199
+dense_2000_1999000.txt,2000,1999000,0,mpi,2,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.008637,0.008692,0.008553,0.008808,0.008815,0.008692,0.008553,0.008815
+dense_3000_4498500.txt,3000,4498500,0,mpi,2,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.020272,0.020472,0.020555,0.036355,0.020488,0.020488,0.020272,0.036355
+dense_10_45.txt,10,45,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",5e-05,5.2e-05,5.3e-05,5.2e-05,0.000106,5.2e-05,5e-05,0.000106
+dense_100_4950.txt,100,4950,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.000143,0.000142,0.000147,0.000142,0.000139,0.000142,0.000139,0.000147
+dense_1000_499500.txt,1000,499500,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.00194,0.001564,0.00185,0.00277,0.001462,0.00185,0.001462,0.00277
+dense_2000_1999000.txt,2000,1999000,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.008568,0.009071,0.005139,0.004999,0.005027,0.005139,0.004999,0.009071
+dense_3000_4498500.txt,3000,4498500,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.011815,0.011216,0.011479,0.011189,0.011396,0.011396,0.011189,0.011815
+dense_10_45.txt,10,45,0,mpi,8,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.000207,0.000167,0.000163,0.000144,0.000203,0.000167,0.000144,0.000207
+dense_100_4950.txt,100,4950,0,mpi,8,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.019267,0.00097,0.000768,0.000796,0.001045,0.00097,0.000768,0.019267
+dense_1000_499500.txt,1000,499500,0,mpi,8,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.005625,0.005486,0.005255,0.005247,0.005803,0.005486,0.005247,0.005803
+dense_2000_1999000.txt,2000,1999000,0,mpi,8,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.013417,0.012187,0.046722,0.016319,0.011173,0.013417,0.011173,0.046722
+dense_3000_4498500.txt,3000,4498500,0,mpi,8,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.021251,0.022667,0.023682,0.022419,0.048825,0.022667,0.021251,0.048825
+dense_10_45.txt,10,45,0,mpi,12,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.003194,0.027795,0.041922,0.000372,0.01466,0.01466,0.000372,0.041922
+dense_100_4950.txt,100,4950,0,mpi,12,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.170547,0.140341,0.069444,0.060193,0.001559,0.069444,0.001559,0.170547
+dense_1000_499500.txt,1000,499500,0,mpi,12,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.007945,0.014113,0.008146,0.346176,0.00807,0.008146,0.007945,0.346176
+dense_2000_1999000.txt,2000,1999000,0,mpi,12,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.026624,0.032372,0.020294,0.019018,0.016753,0.020294,0.016753,0.032372
+dense_3000_4498500.txt,3000,4498500,0,mpi,12,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.057788,0.029208,0.028346,0.036057,0.036982,0.036057,0.028346,0.057788

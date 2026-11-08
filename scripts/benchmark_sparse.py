@@ -17,7 +17,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--implementation", choices=("serial", "mpi", "cuda"), default="serial")
     parser.add_argument("--binary", type=Path)
-    parser.add_argument("--processes", type=int, default=4)
+    parser.add_argument("--processes", type=int, nargs="+", default=[4],
+                        help="MPI process counts, e.g. --processes 1 2 4 8 12")
     parser.add_argument("--mpirun", default="mpirun")
     parser.add_argument("--data-dir", type=Path, default=ROOT / "data")
     parser.add_argument("--kind", choices=("sparse", "dense"), default="sparse")
@@ -27,18 +28,21 @@ def main():
     args = parser.parse_args()
     if args.binary is None:
         args.binary = ROOT / args.implementation
-    label = {"serial": "Serial", "mpi": f"MPI ({args.processes} processes)", "cuda": "CUDA"}[args.implementation]
+    args.processes = list(dict.fromkeys(args.processes))
+    process_counts = args.processes if args.implementation == "mpi" else [1]
+    label = {"serial": "Serial", "mpi": "MPI", "cuda": "CUDA"}[args.implementation]
     scope = {
         "serial": "Algorithm only; excludes graph loading and printing.",
         "mpi": "Algorithm only; excludes scatter/gather, graph loading and printing.",
         "cuda": "Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",
     }[args.implementation]
     if args.output_dir is None:
-        suffix = {"serial": "", "mpi": f"_mpi_np{args.processes}", "cuda": "_cuda"}[args.implementation]
+        mpi_suffix = f"_mpi_np{args.processes[0]}" if len(args.processes) == 1 else "_mpi"
+        suffix = {"serial": "", "mpi": mpi_suffix, "cuda": "_cuda"}[args.implementation]
         args.output_dir = ROOT / "output" / f"benchmark_{args.kind}{suffix}"
     if args.runs < 1:
         parser.error("--runs must be positive")
-    if args.processes < 1:
+    if any(p < 1 for p in args.processes):
         parser.error("--processes must be positive")
     if not args.binary.is_file():
         parser.error(f"Binary not found: {args.binary}. See INSTALL.md.")
@@ -63,10 +67,10 @@ def main():
     cases.sort()
     args.output_dir.mkdir(parents=True, exist_ok=True)
 
-    def measure(path):
+    def measure(path, processes):
         command = [str(args.binary.resolve()), str(path.resolve()), str(args.source)]
         if args.implementation == "mpi":
-            command = [args.mpirun, "--oversubscribe", "-np", str(args.processes)] + command
+            command = [args.mpirun, "--oversubscribe", "-np", str(processes)] + command
         completed = subprocess.run(
             command,
             capture_output=True, text=True, check=True, timeout=300,
@@ -84,33 +88,48 @@ def main():
     with csv_path.open("w", newline="", encoding="utf-8") as output:
         writer = csv.DictWriter(output, fieldnames=fields)
         writer.writeheader()
-        for n, m, path in cases:
-            print(f"Running {path.name}: warmup + {args.runs} measurements", flush=True)
-            measure(path)
-            times = [measure(path) for _ in range(args.runs)]
-            row = {"file": path.name, "vertices": n, "edges": m, "source": args.source}
-            row.update(implementation=args.implementation,
-                       processes=args.processes if args.implementation == "mpi" else 1,
-                       timing_scope=scope)
-            row.update({f"run{i + 1}_s": t for i, t in enumerate(times)})
-            row.update(median_s=statistics.median(times), min_s=min(times), max_s=max(times))
-            writer.writerow(row)
-            output.flush()
-            rows.append(row)
-            print(f"  V={n:>6}, E={m:>6}, median={row['median_s']:.6f} s", flush=True)
+        for processes in process_counts:
+            for n, m, path in cases:
+                print(f"Running {label} ({processes} processes), {path.name}: warmup + {args.runs} measurements", flush=True)
+                measure(path, processes)
+                times = [measure(path, processes) for _ in range(args.runs)]
+                row = {"file": path.name, "vertices": n, "edges": m, "source": args.source}
+                row.update(implementation=args.implementation,
+                           processes=processes,
+                           timing_scope=scope)
+                row.update({f"run{i + 1}_s": t for i, t in enumerate(times)})
+                row.update(median_s=statistics.median(times), min_s=min(times), max_s=max(times))
+                writer.writerow(row)
+                output.flush()
+                rows.append(row)
+                print(f"  V={n:>6}, E={m:>6}, median={row['median_s']:.6f} s", flush=True)
 
     plot_results(args, rows, plt, label, scope)
 
 
 def plot_results(args, rows, plt, label, scope):
-    fig, axes = plt.subplots(1, 2, figsize=(12, 5))
-    medians = [row["median_s"] for row in rows]
-    for ax, key, axis_label in zip(axes, ("vertices", "edges"), ("Vertices (V)", "Edges (E)")):
-        ax.plot([row[key] for row in rows], medians, "o-", label=f"{label}: median")
-        ax.set_xlabel(axis_label)
-        ax.set_ylabel("Reported execution time (seconds)")
-        ax.set_ylim(bottom=0)
-        ax.grid(True, alpha=0.3)
+    if args.implementation == "mpi":
+        fig, ax = plt.subplots(figsize=(8, 5))
+        axes = [ax]
+        dimensions = [("vertices", "Vertices (V)")]
+    else:
+        fig, axes = plt.subplots(1, 2, figsize=(12, 5))
+        dimensions = [("vertices", "Vertices (V)"), ("edges", "Edges (E)")]
+    for ax, (key, axis_label) in zip(axes, dimensions):
+        for processes in sorted({row["processes"] for row in rows}):
+            series = sorted((row for row in rows if row["processes"] == processes),
+                            key=lambda row: row[key])
+            series_label = f"MPI ({processes} processes)" if args.implementation == "mpi" else label
+            ax.plot([row[key] for row in series], [row["median_s"] for row in series],
+                    "o-", label=f"{series_label}: median")
+        ax.set_xscale("log")
+        ax.set_yscale("log")
+        ticks = sorted({row[key] for row in rows})
+        ax.set_xticks(ticks, labels=[f"{value:,}" for value in ticks], rotation=30)
+        ax.tick_params(axis="x", which="minor", bottom=False, labelbottom=False)
+        ax.set_xlabel(f"{axis_label} — log scale")
+        ax.set_ylabel("Reported execution time (seconds) — log scale")
+        ax.grid(True, which="both", alpha=0.3)
         ax.legend(fontsize=8)
     fig.suptitle(f"{args.kind.capitalize()} graphs — {label}, source {args.source}, {args.runs} runs")
     if all(row["edges"] == 3 * row["vertices"] for row in rows):

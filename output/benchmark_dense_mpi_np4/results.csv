@@ -1,4 +1,0 @@
-file,vertices,edges,source,implementation,processes,timing_scope,run1_s,run2_s,run3_s,run4_s,run5_s,median_s,min_s,max_s
-dense_100_4950.txt,100,4950,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.000258,0.000235,0.000242,0.000227,0.000232,0.000235,0.000227,0.000258
-dense_1000_499500.txt,1000,499500,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.002998,0.002447,0.00292,0.003756,0.002495,0.00292,0.002447,0.003756
-dense_2000_1999000.txt,2000,1999000,0,mpi,4,"Algorithm only; excludes scatter/gather, graph loading and printing.",0.006574,0.006835,0.009351,0.010627,0.011335,0.009351,0.006574,0.011335

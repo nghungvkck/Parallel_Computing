@@ -1,0 +1,6 @@
+file,vertices,edges,source,implementation,processes,timing_scope,run1_s,run2_s,run3_s,run4_s,run5_s,median_s,min_s,max_s
+dense_10_45.txt,10,45,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.005169,0.006018,0.005485,0.006439,0.005329,0.005485,0.005169,0.006439
+dense_100_4950.txt,100,4950,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.007455,0.005982,0.00587,0.006526,0.004979,0.005982,0.004979,0.007455
+dense_1000_499500.txt,1000,499500,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.010156,0.011585,0.013163,0.012561,0.011215,0.011585,0.010156,0.013163
+dense_2000_1999000.txt,2000,1999000,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.019544,0.024937,0.024502,0.020881,0.02018,0.020881,0.019544,0.024937
+dense_3000_4498500.txt,3000,4498500,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.033392,0.033874,0.033663,0.033696,0.033122,0.033663,0.033122,0.033874

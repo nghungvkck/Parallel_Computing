@@ -1,0 +1,8 @@
+file,vertices,edges,source,implementation,processes,timing_scope,run1_s,run2_s,run3_s,run4_s,run5_s,median_s,min_s,max_s
+sparse_10_30.txt,10,30,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.006261,0.005044,0.005993,0.00441,0.006263,0.005993,0.00441,0.006263
+sparse_100_300.txt,100,300,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.019723,0.007056,0.00702,0.008918,0.007274,0.007274,0.00702,0.019723
+sparse_1000_3000.txt,1000,3000,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.013357,0.015532,0.014528,0.015832,0.026781,0.015532,0.013357,0.026781
+sparse_2000_6000.txt,2000,6000,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.027406,0.027741,0.026785,0.024583,0.029019,0.027406,0.024583,0.029019
+sparse_5000_15000.txt,5000,15000,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.092411,0.095448,0.09374,0.093774,0.099803,0.093774,0.092411,0.099803
+sparse_10000_30000.txt,10000,30000,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",0.411523,0.404303,0.410843,0.397168,0.410564,0.410564,0.397168,0.411523
+sparse_20000_60000.txt,20000,60000,0,cuda,1,"Includes GPU allocation, transfers, kernels and cleanup; excludes graph loading/printing.",5.155737,5.136835,5.161997,5.152338,5.141566,5.152338,5.136835,5.161997
